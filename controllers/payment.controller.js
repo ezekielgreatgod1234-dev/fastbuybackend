@@ -133,9 +133,26 @@ const paymentWebhook = async (req, res) => {
   try{
       const hash = crypto.createHmac('sha512', process.env.PAYSTACK_SECRET).update(req.rawBody).digest('hex');
     if (hash == req.headers['x-paystack-signature']){
-      const {event} = req.body;
+      const {event, body} = req.body;
+
+      if(event === "charge.success"){
+           res.status(StatusCodes.OK).json({
+      message: "successWebhook verified",
+      status: true,
+      data: {
+        reference: body.reference,
+        status: "success"
+      },
+    });
+    
     }
-  }catch {
+  }
+} catch (error) {
+    console.log(error.response);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: "oops something went wrong",
+      status: false,
+    });
     
   }
 }
