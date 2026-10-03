@@ -74,7 +74,7 @@ const foodItems = [
   {
     id: 10,
     name: "Chips & Sauce",
-    price: 1500,
+    price: 100,
     category: "Fast Food",
     image:
       "https://i.pinimg.com/736x/23/9a/cc/239accb1ea2e0d12e41a376a9adfd94b.jpg",
